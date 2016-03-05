@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Registration Form</title>
+    <!--CSS import -->
+    <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+    <link href="../Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/dashboard.css" rel="stylesheet" type="text/css" />
+    <!--Scripts for angular-->
+        <script src="../Scripts/angular.min.js" type="text/javascript"></script>
+    <script src="../Scripts/angular-route.js" type="text/javascript"></script>
+    <script src="../Scripts/checklist-model.js" type="text/javascript"></script>
+    <script src="../Scripts/angular-messages.js" type="text/javascript"></script>
+    <!--Controllers and required JS -->
+    <script src="../app.js" type="text/javascript"></script>
+      <script src="../router.js" type="text/javascript"></script>
+    <script src="../Controller/controller.js" type="text/javascript"></script>
+    <script src="../Controller/Filters.js" type="text/javascript"></script>
+  
+    <!--JSON import-->
+    <script src="../JSON/Country.js" type="text/javascript"></script>
+    <script src="../JSON/State.js" type="text/javascript"></script>
+    <script src="../JSON/StateWiseDistrict.js" type="text/javascript"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">               
+                <a class="navbar-brand" href="#">Employee Registration</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#ListLocalStorage">List from Local Storage</a> </li>
+                    <li><a href="#index1">Add Employee</a> </li>
+                </ul>
+            </div>
+        </div>
+       <div ng-view>
+
+            </div>
+    </div>
+</body>
+</html>

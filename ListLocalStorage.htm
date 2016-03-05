@@ -1,0 +1,43 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <title>List from Local Storage</title>
+   
+</head>
+<body>
+<h3>List of Employees</h3>
+                    <table class="table table-bordered table-hover" align="right">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sr.No.
+                                </th>
+                                <th ng-click="orderByMe('name');" style="cursor: pointer">
+                                    Employee Name
+                                </th>
+                                <th ng-click="orderByMe('salary');" style="cursor: pointer">
+                                    Salary
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="emp in EmpListLocal">
+                                <td>
+                                    {{$index + 1}}
+                                </td>
+                                <td>
+                                    {{emp.name}}
+                                </td>
+                                <td>
+                                    {{emp.salary}}
+                                </td>
+                                                            
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group" align="right">
+                    <button type = "submit" class="btn btn-success" ng-click="saveEmpDataFromLocalToCloud();">Sync to Cloud</button></div>
+
+</body>
+</html>

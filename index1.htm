@@ -1,0 +1,224 @@
+﻿ <form class="form-horizontal" role="form" name="empform" novalidate>
+        <div class="col-md-10 main">
+            
+            <div class="alert alert-danger" ng-show="showMsg">
+                {{message}}
+            </div>
+            <!-- Form Name -->
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    Enter Full Name :
+                </label>
+                <div class="col-md-4">
+                    <input class="form-control input-md" name="fname" type="text" placeholder="Full Name"
+                        ng-model="employee.name" required>
+                </div>
+                <div class="form-group" ng-messages="empform.fname.$error" ng-show="empform.fname.$touched && empform.fname.$invalid">
+                    <p ng-message="required">
+                        This field is required
+                    </p>
+                </div>
+            </div>
+            <!-- Multiple Radios (inline) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    Select Gender :
+                </label>
+                <div class="col-md-4">
+                    <label ng-repeat="gen in gender" ng-model="gender" class="radio-inline">
+                        <input type="radio" value="{{gen}}" ng-model="employee.gender" name="gend" required>{{gen}}
+                    </label>
+                </div>
+                <div ng-messages="empform.gend.$error" ng-show="empform.gend.$error">
+                    <p ng-message="required">
+                        This field is required</p>
+                </div>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">
+                    Select Religion</label>
+                <div class="col-md-4">
+                    <select class="form-control" ng-model="employee.religion">
+                        <option value="">--Select--</option>
+                        <option ng-repeat="rel in religions">{{rel.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    Enter DOB :
+                </label>
+                <div class="col-md-4">
+                    <input type="month" placeholder="dd-MM-yyyy" ng-model="employee.DOB" />
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Enter Mobile No :
+                </label>
+                <div class="col-md-4">
+                    <input class="form-control input-md" type="number" name="mobno" placeholder="Mobile No"
+                        ng-model="employee.mobileNo" ng-maxlength="10" required>
+                </div>
+                <p class="error" ng-show="empform.mobno.$error.maxlength">
+                    Cannot be greater than 10 digits</p>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Enter Salary :
+                </label>
+                <div class="col-md-4">
+                    <input class="form-control input-md" name="sal" type="number" placeholder="Salary"
+                        ng-model="employee.salary" ng-maxlength="7" required>
+                </div>
+                <p ng-show="empform.sal.$error.maxlength">
+                    Salary cannot be more than 7 digits</p>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Select Country :</label>
+                <div class="col-md-4">
+                    <select class="form-control" ng-options="count as count.Country_Description for count in countrylist track by count.pk_Country_ID"
+                        ng-model="employee.address.country">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Select State :
+                </label>
+                <div class="col-md-4">
+                    <select class="form-control" ng-disabled="!employee.address.country" ng-options="st as st.State_Name for st in statelist|filter:{Country_ID:employee.address.country.pk_Country_ID}:true track by st.State_ID"
+                        ng-model="employee.address.state">
+                        <option value="">--Select--</option>
+                        <!-- <option ng-repeat = "st.State_ID as st.State_Name for st in statelist">{{st.State_Name}}</option>-->
+                    </select>
+                </div>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Select District :
+                </label>
+                <div class="col-md-4">
+                    <select class="form-control" ng-disabled="!employee.address.state" ng-options="dis as dis.text for dis in districtlist|filter:{State_ID:employee.address.state.State_ID}:true track by dis.value"
+                        ng-model="employee.address.district">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Enter Address :
+                </label>
+                <div class="col-md-4">
+                    <textarea class="form-control" ng-model="employee.address.firstline" rows="3"></textarea>
+                </div>
+            </div>
+            <!-- Select Multiple -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Select Qualifications</label>
+                <div class="col-md-4">
+                    <select class="form-control" multiple="multiple" ng-options="qual as qual.QualName for qual in qualifications track by qual.QualID"
+                        ng-model="employee.qualifications">
+                        <option value="" />
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="">
+                    Select Hobbies :
+                </label>
+                <label class="checkbox-inline" ng-repeat="hob in hobbyList">
+                    <input type="checkbox" data-checklist-model="employee.hobbies" data-checklist-value="hob" />{{hob.HobbyName}}
+                </label>
+            </div>
+            <div class="form-group">
+                <div style="height: 30px">
+                </div>
+                <div align="center">
+                    <!--  <button type="submit" ng-click="Save();" class="btn btn-success" ng-disabled="empform.$invalid">
+                            Save</button>
+-->
+                    <button type="submit" ng-click="saveEmpToLocal(employee);" class="btn btn-success"
+                        ng-disabled="empform.$invalid">
+                        Save</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn" ng-click="newStudent();">
+                        New</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div align="right">
+                    <input type="checkbox" ng-model="hideEmpList" />Hide Employee List
+                </div>
+                <br />
+                <div class="form-group" align="right">
+                    Enter Salary Range:
+                    <input type="text" ng-model="salRange" />
+                    <br />
+                </div>
+                <div align="right" ng-show="employeeList.length>0" ng-hide="hideEmpList">
+                    <h3>
+                        List of Employees</h3>
+                    <table class="table table-bordered table-hover" align="right">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sr.No.
+                                </th>
+                                <th ng-click="orderByMe('name');" style="cursor: pointer">
+                                    Employee Name
+                                </th>
+                                <th ng-click="orderByMe('salary');" style="cursor: pointer">
+                                    Salary
+                                </th>
+                                <th>
+                                    Count of Students with same Name
+                                </th>
+                                <th>
+                                    Edit
+                                </th>
+                                <th>
+                                    Delete
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="emp in employeeList | unique:'name'">
+                                <td>
+                                    {{$index + 1}}
+                                </td>
+                                <td>
+                                    {{emp.name}}
+                                </td>
+                                <td>
+                                    {{emp.salary}}
+                                </td>
+                                <td>
+                                    {{emp.Count}}
+                                </td>
+                                <td>
+                                    <button type="submit" ng-click="EnableEdit(emp);">
+                                        Edit</button>
+                                </td>
+                                <td>
+                                    <button type="submit" ng-click="Delete(emp._id.$oid);">
+                                        Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{employee|json}}
+        </div>
+        </form>
